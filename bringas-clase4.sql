@@ -52,6 +52,18 @@ WHERE f1.rating = f2.rating
 AND f1.film_id > f2.film_id;
 
 -- 8
- 
+SELECT DISTINCT title, store.store_id, staff.first_name,staff.last_name
+FROM film, inventory, store, staff
+WHERE store.store_id=2 
+AND store.store_id = staff.store_id
+AND store.store_id=inventory.store_id
+AND inventory.film_id=film.film_id;
+
+
+
+
+
+
+
 
 
