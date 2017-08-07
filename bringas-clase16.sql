@@ -64,7 +64,24 @@ ALTER TABLE employees CONSTRAINT CheckAge CHECK(age BETWEEN 16 and 70); -- get e
 insert  into `employees`(`employeeNumber`,`lastName`,`firstName`,`extension`,`email`,`officeCode`,`reportsTo`,`jobTitle`, age) values 
 (009,'Murphy','Diane','x5800','dmurphy@classicmodelcars.com','1',NULL,'President', 15);
 
-
+-- 5
+ALTER TABLE employees_audit ADD lastUpdate DATETIME DEFAULT NULL;
+ALTER TABLE employees_audit ADD lastUpdateUser VARCHAR(32) DEFAULT  "";
+DELIMITER $$
+CREATE TRIGGER employee_lastUpdate 
+    BEFORE UPDATE ON employees
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO employees_audit
+    SET action = 'update',
+    employeeNumber = OLD.employeeNumber,
+    lastname = OLD.lastname,
+    lastUpdateUser = SELECT CURRENT_USER()
+    lastUpdate = NOW();
+     
+END$$
+DELIMITER ;
+DESCRIBE employees_audit;
 -- 6  
 -- ins_film inserta un nuevo film_text
 -- upd_film hace un update a un film_text ya existente
