@@ -55,13 +55,17 @@ insert  into `employees`(`employeeNumber`,`lastName`,`firstName`,`extension`,`em
  -- 3
  ALTER TABLE employees ADD age INT;
  ALTER TABLE employees
-   ADD CONSTRAINT myCheckAge CHECK(age > 16) ; -- this doesnt work
+   ADD CONSTRAINT myCheckAge CHECK(age > 16) ; -- no funciona
  ALTER TABLE employees
-   ADD CONSTRAINT myCheckAgee CHECK(age <70 ); -- same 
+   ADD CONSTRAINT myCheckAgee CHECK(age <70 ); -- tampoco funciona
    
 ALTER TABLE employees CONSTRAINT CheckAge CHECK(age BETWEEN 16 and 70); -- get error 
--- i dont wanna write a trigger 
+-- no quiero escribir un trigger
 insert  into `employees`(`employeeNumber`,`lastName`,`firstName`,`extension`,`email`,`officeCode`,`reportsTo`,`jobTitle`, age) values 
 (009,'Murphy','Diane','x5800','dmurphy@classicmodelcars.com','1',NULL,'President', 15);
 
 
+-- 6  
+-- ins_film inserta un nuevo film_text
+-- upd_film hace un update a un film_text ya existente
+-- del_film elimina un el film_text
