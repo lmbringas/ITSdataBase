@@ -23,6 +23,38 @@ INNER JOIN film_actor USING(film_id)
 INNER JOIN actor USING(actor_id)
 GROUP BY 1, 4;
 
--- Create view sales_by_film_category, it should return 'category' and 'total_rental' columns.
--- 3 
 
+-- 3 
+SELECT name, SUM(amount) FROM category 
+INNER JOIN film_category USING(category_id)
+INNER JOIN film USING(film_id)
+INNER JOIN inventory USING(film_id)
+INNER JOIN rental USING(inventory_id)
+INNER JOIN payment USING(rental_id)
+GROUP BY name;
+
+-- 4 
+SELECT actor_id, first_name, last_name, SUM(amount) FROM actor 
+INNER JOIN film_actor USING(actor_id)
+INNER JOIN film USING(film_id)
+INNER JOIN inventory USING(film_id)
+INNER JOIN rental USING(inventory_id)
+INNER JOIN payment USING(rental_id)
+GROUP BY 1,2,3;
+
+-- Analyze view actor_info, explain the entire query and specially how the sub query works.
+-- Be very specific, take some time and decompose each part and give an explanation for each. 
+-- 5
+-- Muestra cada actor con su correspondientes categorias en las peliculas en las cual actuo 
+-- id nombre apellido Genero: Pelicula 
+
+-- 6 
+-- A materialized view is a replica of a target master from a single point in time. 
+-- The master can be either a master table at a master site or a master materialized view at a materialized view site.
+-- Whereas in multimaster replication tables are continuously updated by other master sites, materialized views are updated from one or more masters through individual batch updates,
+-- known as a refreshes, from a single master site or master materialized view site
+-- You can use materialized views to achieve one or more of the following goals:
+--    *Ease Network Loads
+--    *Create a Mass Deployment Environment
+--    *Enable Data Subsetting
+ --   *Enable Disconnected Computing
