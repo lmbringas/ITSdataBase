@@ -26,7 +26,7 @@ BEGIN
   
 
 
-SELECT GetCountFilm(2,3,"Coma Head");
+SELECT GetCountFilm(2,0,"Coma Head");
 
 -- 2 
 -- Write a stored procedure that returns a list of customer first and last names separated by ";", 
@@ -54,3 +54,14 @@ END
 set @List = "";
 CALL GetListCustomer("Argentina", @List);
 SELECT @List;
+
+
+-- 3 
+-- es una funcion que le pasas el id de inventory y retorna true si existe
+SELECT inventory_in_stock(2);
+
+
+-- es un procedure tiene como entrada id de un film y un id de un tienda y out que va ser la cantidad de row que devolvio
+-- el select sin contar limit 
+CALL film_in_stock(1,1,@outr);
+SELECT @outr
